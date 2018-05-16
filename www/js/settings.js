@@ -135,6 +135,7 @@ const Settings = L.Control.extend({
               latlng(pos.coords),
               Math.max(16, this._map.getZoom())
             );
+            dispatchEvent(new CustomEvent('geoshare:location'));
           }
           this._coords = pos.coords;
           this.update();

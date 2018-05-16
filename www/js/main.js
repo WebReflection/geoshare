@@ -153,31 +153,33 @@ document.addEventListener(
         // also try to do the same if the user closes the browser
         addEventListener('beforeunload', setMapState);
 
-        // show an introductory message.
-        // it's numbered so next time I update something
-        // I can simply use introduction-X if introduction-Y
-        // was already there, or use previous introduction
-        // and show next one the next time.
-        if (!storage.get('introduction-1')) {
-          setTimeout(() => {
-            storage.set('introduction-1', 1);
-            mplugin.showMessage(
-            `**Welcome** to Geo Share, a **P**rogressive **W**eb **A**pplication
-            to share your location with friends.
-            <hr>
-            Following a list of what you can do as __${IS_GUEST ? 'guest' : 'host'}__:<br>
-            <ul>
-              <li> change your name by clicking 👤 </li>
-              <li> see all people on the map ${
-                IS_GUEST ? '' : ' and **copy** your URL to share '
-              } by clicking 👥 </li>
-              <li> enable geo location or find yourself in the map by clicking 🌐 </li>
-              <li> send messages to others (bottom left)</li>
-            </ul>`,
-               true
-            );
-          }, 1000);
-        }
+        addEventListener('geoshare:location', () => {
+          // show an introductory message.
+          // it's numbered so next time I update something
+          // I can simply use introduction-X if introduction-Y
+          // was already there, or use previous introduction
+          // and show next one the next time.
+          if (!storage.get('introduction-1')) {
+            setTimeout(() => {
+              storage.set('introduction-1', 1);
+              mplugin.showMessage(
+              `**Welcome** to Geo Share, a **P**rogressive **W**eb **A**pplication
+              to share your location with friends.
+              <hr>
+              Following a list of what you can do as __${IS_GUEST ? 'guest' : 'host'}__:<br>
+              <ul>
+                <li> change your name by clicking 👤 </li>
+                <li> see all people on the map ${
+                  IS_GUEST ? '' : ' and **copy** your URL to share '
+                } by clicking 👥 </li>
+                <li> enable geo location or find yourself in the map by clicking 🌐 </li>
+                <li> send messages to others (bottom left)</li>
+              </ul>`,
+                true
+              );
+            }, 1000);
+          }
+        });
       },
       console.error
     );

@@ -182,17 +182,19 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       // also try to do the same if the user closes the browser
       addEventListener('beforeunload', setMapState);
 
-      // show an introductory message.
-      // it's numbered so next time I update something
-      // I can simply use introduction-X if introduction-Y
-      // was already there, or use previous introduction
-      // and show next one the next time.
-      if (!storage.get('introduction-1')) {
-        setTimeout(function () {
-          storage.set('introduction-1', 1);
-          mplugin.showMessage('**Welcome** to Geo Share, a **P**rogressive **W**eb **A**pplication\n            to share your location with friends.\n            <hr>\n            Following a list of what you can do as __' + (IS_GUEST ? 'guest' : 'host') + '__:<br>\n            <ul>\n              <li> change your name by clicking \uD83D\uDC64 </li>\n              <li> see all people on the map ' + (IS_GUEST ? '' : ' and **copy** your URL to share ') + ' by clicking \uD83D\uDC65 </li>\n              <li> enable geo location or find yourself in the map by clicking \uD83C\uDF10 </li>\n              <li> send messages to others (bottom left)</li>\n            </ul>', true);
-        }, 1000);
-      }
+      addEventListener('geoshare:location', function () {
+        // show an introductory message.
+        // it's numbered so next time I update something
+        // I can simply use introduction-X if introduction-Y
+        // was already there, or use previous introduction
+        // and show next one the next time.
+        if (!storage.get('introduction-1')) {
+          setTimeout(function () {
+            storage.set('introduction-1', 1);
+            mplugin.showMessage('**Welcome** to Geo Share, a **P**rogressive **W**eb **A**pplication\n              to share your location with friends.\n              <hr>\n              Following a list of what you can do as __' + (IS_GUEST ? 'guest' : 'host') + '__:<br>\n              <ul>\n                <li> change your name by clicking \uD83D\uDC64 </li>\n                <li> see all people on the map ' + (IS_GUEST ? '' : ' and **copy** your URL to share ') + ' by clicking \uD83D\uDC65 </li>\n                <li> enable geo location or find yourself in the map by clicking \uD83C\uDF10 </li>\n                <li> send messages to others (bottom left)</li>\n              </ul>', true);
+          }, 1000);
+        }
+      });
     }, console.error);
   }, { once: true });
 
@@ -336,6 +338,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
           if (firstTime) {
             storage.set('location', 1);
             _this2._map.setView(latlng(pos.coords), Math.max(16, _this2._map.getZoom()));
+            dispatchEvent(new CustomEvent('geoshare:location'));
           }
           _this2._coords = pos.coords;
           _this2.update();
