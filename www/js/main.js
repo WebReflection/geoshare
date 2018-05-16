@@ -167,14 +167,14 @@ document.addEventListener(
               `**Welcome** to Geo Share, a **P**rogressive **W**eb **A**pplication
               to share your location with friends.
               <hr>
-              Following a list of what you can do as __${IS_GUEST ? 'guest' : 'host'}__:<br>
+              Following what you can do as __${IS_GUEST ? 'guest' : 'host'}__:<br>
               <ul>
-                <li> change your name by clicking 👤 </li>
-                <li> see all people on the map ${
+                <li> **enable** geo **location** or find yourself in the map by clicking 🌐 </li>
+                <li> **change** your **name** by clicking 👤 </li>
+                <li> **see** all **people** on the map ${
                   IS_GUEST ? '' : ' and **copy** your URL to share '
                 } by clicking 👥 </li>
-                <li> enable geo location or find yourself in the map by clicking 🌐 </li>
-                <li> send messages to others (bottom left)</li>
+                <li> send **messages** to others (bottom left)</li>
               </ul>`,
                 true
               );
