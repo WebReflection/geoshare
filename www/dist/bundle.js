@@ -166,6 +166,7 @@ document.addEventListener(
         // also try to do the same if the user closes the browser
         addEventListener('beforeunload', setMapState);
 
+        // whenever is necessary ...
         addEventListener('geoshare:location', () => {
           // show an introductory message.
           // it's numbered so next time I update something
@@ -193,6 +194,11 @@ document.addEventListener(
             }, 1000);
           }
         });
+
+        // if the user is host for the first time
+        // show the welcome message right away
+        if (!IS_GUEST && !storage.get('location'))
+          dispatchEvent(new CustomEvent('geoshare:location'));
       },
       console.error
     );

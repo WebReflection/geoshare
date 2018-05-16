@@ -182,6 +182,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       // also try to do the same if the user closes the browser
       addEventListener('beforeunload', setMapState);
 
+      // whenever is necessary ...
       addEventListener('geoshare:location', function () {
         // show an introductory message.
         // it's numbered so next time I update something
@@ -195,6 +196,10 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
           }, 1000);
         }
       });
+
+      // if the user is host for the first time
+      // show the welcome message right away
+      if (!IS_GUEST && !storage.get('location')) dispatchEvent(new CustomEvent('geoshare:location'));
     }, console.error);
   }, { once: true });
 
