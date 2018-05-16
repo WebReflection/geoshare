@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "name": "geoshare",
+  "author": "Andrea Giammarchi",
+  "license": "ISC",
+  "scripts": {
+    "asbundle": "asbundle www/js/main.js www/dist/bundle.js",
+    "bundle": "npm run asbundle && npm run max && npm run min",
+    "max": "babel www/dist/bundle.js > www/dist/max.js",
+    "min": "uglifyjs www/dist/max.js -m -c -o www/dist/min.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.2",
+    "express": "^4.16.3",
+    "pusher": "^2.0.0",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "asbundle": "^2.6.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "uglify-js": "^3.3.23"
+  }
+}

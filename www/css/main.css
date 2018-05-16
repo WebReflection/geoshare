@@ -1,0 +1,169 @@
+html, body, #map
+{
+  margin: 0;
+  padding: 0;
+}
+
+#map
+{
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+.settings
+{
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0,0.2);
+  border-radius: 2px;
+  padding: 2px;
+}
+
+.settings button
+{
+  flex-grow: 1;
+  line-height: 30px;
+  text-align: left;
+  background-color: #fff;
+  pointer-events: auto;
+  border: none;
+  margin: 0;
+}
+
+.settings button:not(:disabled):hover
+{
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+.settings button.name
+{
+  border-bottom: 1px solid #ccc;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.settings button.location
+{
+  border-top: 1px solid #ccc;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.settings button.name::after,
+.settings button.invite::after,
+.settings button.location::after
+{
+  font-size: 18px;
+  float: right;
+  margin-left: 8px;
+}
+
+.settings button.name::after
+{
+  content: '👤';
+}
+
+.settings button.invite::after
+{
+  content: '👥';
+}
+
+.settings button.location::after
+{
+  content: '🌐';
+}
+
+.leaflet-pane img,
+.leaflet-pane .leaflet-tooltip
+{
+  transition: all 0.3s ease-out;
+}
+
+.messaging
+{
+  display: flex;
+  flex-direction: row;
+  background: rgba(0, 0, 0,0.2);
+  border-radius: 2px;
+  padding: 2px;
+}
+
+.messaging input[type="submit"]
+{
+  background-color: #f4f4f4;
+  cursor: pointer;
+  border-left: 1px solid #ccc;
+}
+
+.messaging input
+{
+  line-height: 27px;
+  border: none;
+  margin: 0;
+}
+
+.messaging input[name="message"]
+{
+  flex-grow: 1;
+  padding: 0 4px;
+}
+
+.popup
+{
+  pointer-events: none;
+  position: fixed;
+  top: 128px;
+  left: 40%;
+  width: 60%;
+  margin-left: calc(-1 * (20% + 4px));
+  background: rgba(0, 0, 0,0.2);
+  border-radius: 2px;
+  padding: 2px;
+  opacity: 0;
+  z-index: 2;
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  transition: opacity 0.5s 0.1s ease-in;
+}
+
+.popup.show
+{
+  opacity: 1;
+}
+
+.popup > div
+{
+  padding: 16px;
+  background-color: #fff;
+  color: #111;
+}
+
+@media (max-width: 800px)
+{
+  .popup
+  {
+    left: 20%;
+    width: 80%;
+    margin-left: calc(-1 * (10% + 4px));
+  }
+}
+
+@media (max-width: 480px)
+{
+  .popup
+  {
+    left: 8px;
+    width: calc(100% - 20px);
+    margin-left: 0;
+  }
+}
+
+
+@media (max-width: 420px)
+{
+  .messaging
+  {
+    transform: translateY(-16px);
+  }
+}

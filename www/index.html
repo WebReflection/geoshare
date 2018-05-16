@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geo Share</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <script>addEventListener('beforeinstallprompt',{type:'geoshare:install',handleEvent:function(e){var s=this;if(e.type==s.type){removeEventListener(e.type,s);s.prompt()}else{addEventListener(s.type,s);s.prompt=e.prompt.bind(e)}}})</script>
+    <script>if(!window.Promise)document.write('<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"><'+'/script>');</script>
+    <script>if(!Array.from)Array.from=function(a){return[].slice.call(a)}</script>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/leaflet.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+    <script defer src="js/3rd/leaflet.js"></script>
+    <script defer src="js/3rd/nosleep.js"></script>
+    <script defer src="js/3rd/pusher.js"></script>
+    <script defer src="js/3rd/hyperhtml.js"></script>
+    <script defer src="js/3rd/lightdown.js"></script>
+    <script defer src="dist/min.js"></script>
+  </head>
+  <body><div id="map"></div></body>
+</html>
