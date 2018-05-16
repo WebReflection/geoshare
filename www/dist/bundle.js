@@ -89,10 +89,12 @@ document.addEventListener(
         // update a user on the map via settings plugin
         // it also fly on users if the user is new
         const updateClient = client => {
-          if (splugin)
-            splugin.updateUser(users[client.id], client);
-          if (client.firstTime)
-            setTimeout(dispatchEvent, 500, new CustomEvent('client-bounds'));
+          if (client.id in users) {
+            if (splugin)
+              splugin.updateUser(users[client.id], client);
+            if (client.firstTime)
+              setTimeout(dispatchEvent, 500, new CustomEvent('client-bounds'));
+          }
         };
         channel.bind('client-update', updateClient);
         channel.bind('client-update-' + me.id, clients => {

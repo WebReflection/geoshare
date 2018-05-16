@@ -111,8 +111,10 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       // update a user on the map via settings plugin
       // it also fly on users if the user is new
       var updateClient = function updateClient(client) {
-        if (splugin) splugin.updateUser(users[client.id], client);
-        if (client.firstTime) setTimeout(dispatchEvent, 500, new CustomEvent('client-bounds'));
+        if (client.id in users) {
+          if (splugin) splugin.updateUser(users[client.id], client);
+          if (client.firstTime) setTimeout(dispatchEvent, 500, new CustomEvent('client-bounds'));
+        }
       };
       channel.bind('client-update', updateClient);
       channel.bind('client-update-' + me.id, function (clients) {
