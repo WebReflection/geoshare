@@ -112,14 +112,21 @@ document.addEventListener(
           });
           if (bounds.length > 1)
             map.flyToBounds(bounds);
-          if (!IS_GUEST && mplugin)
-            mplugin.showMessage(
-              [
-                'Your **URL** has been copied to your device clipboard.',
-                'You can share it with friends by simply pasting it.'
-              ].join('<br>'),
-              true
-            );
+          // host that for the first time clicks the icon
+          // should see the message about the hidden action
+          // that happened (the copy to clipboard part)
+          if (!IS_GUEST && mplugin && !storage.get('clipboard-message')) {
+            storage.set('clipboard-message', 1);
+            setTimeout(() => {
+              mplugin.showMessage(
+                [
+                  'Your **URL** has been copied to your device clipboard.',
+                  'You can share it with friends by simply pasting it.'
+                ].join('<br>'),
+                true
+              );
+            }, 500);
+          }
         });
 
         // store map state to have right back next time
