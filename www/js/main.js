@@ -112,6 +112,14 @@ document.addEventListener(
           });
           if (bounds.length > 1)
             map.flyToBounds(bounds);
+          if (!IS_GUEST && mplugin)
+            mplugin.showMessage(
+              [
+                'Your **URL** has been copied to your device clipboard.',
+                'You can share it with friends by simply pasting it.'
+              ].join('<br>'),
+              true
+            );
         });
 
         // store map state to have right back next time

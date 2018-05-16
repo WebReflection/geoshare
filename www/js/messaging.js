@@ -96,7 +96,7 @@ const Messaging = L.Control.extend({
         else
           this._showing = false;
       }, 600);
-    }, 600 + Math.min(8000, message.length * 60));
+    }, 600 + Math.min(8000, message.length * 30));
   }
 
 });
