@@ -192,7 +192,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
         if (!storage.get('introduction-1')) {
           setTimeout(function () {
             storage.set('introduction-1', 1);
-            mplugin.showMessage('**Welcome** to Geo Share, a **P**rogressive **W**eb **A**pplication\n              to share your location with friends.\n              <hr>\n              Following a list of what you can do as __' + (IS_GUEST ? 'guest' : 'host') + '__:<br>\n              <ul>\n                <li> change your name by clicking \uD83D\uDC64 </li>\n                <li> see all people on the map ' + (IS_GUEST ? '' : ' and **copy** your URL to share ') + ' by clicking \uD83D\uDC65 </li>\n                <li> enable geo location or find yourself in the map by clicking \uD83C\uDF10 </li>\n                <li> send messages to others (bottom left)</li>\n              </ul>', true);
+            mplugin.showMessage('**Welcome** to Geo Share, a **P**rogressive **W**eb **A**pplication\n              to share your location with friends.\n              <hr>\n              Following what you can do as __' + (IS_GUEST ? 'guest' : 'host') + '__:<br>\n              <ul>\n                <li> **enable** geo **location** or find yourself in the map by clicking \uD83C\uDF10 </li>\n                <li> **change** your **name** by clicking \uD83D\uDC64 </li>\n                <li> **see** all **people** on the map ' + (IS_GUEST ? '' : ' and **copy** your URL to share ') + ' by clicking \uD83D\uDC65 </li>\n                <li> send **messages** to others (bottom left)</li>\n              </ul>', true);
           }, 1000);
         }
       });
