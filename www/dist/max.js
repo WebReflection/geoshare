@@ -2,9 +2,10 @@
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n      <button class=name onclick=', '>\n        ', '\n      </button>\n      <button class=invite onclick=', '>\n        ', '\n      </button>\n      <button class=location onclick=', '>geo</button>\n    '], ['\n      <button class=name onclick=', '>\n        ', '\n      </button>\n      <button class=invite onclick=', '>\n        ', '\n      </button>\n      <button class=location onclick=', '>geo</button>\n    ']),
-    _templateObject2 = _taggedTemplateLiteral(['<div class="popup"><div></div></div>'], ['<div class="popup"><div></div></div>']),
-    _templateObject3 = _taggedTemplateLiteral(['\n      <input\n        onclick=', '\n        placeholder="say something"\n        maxlength=160\n        name=message\n        autocomplete=off\n        autocorrect=off\n        autocapitalize=off\n      />\n      <input type=submit />\n    '], ['\n      <input\n        onclick=', '\n        placeholder="say something"\n        maxlength=160\n        name=message\n        autocomplete=off\n        autocorrect=off\n        autocapitalize=off\n      />\n      <input type=submit />\n    ']);
+var _templateObject = _taggedTemplateLiteral(['<div id="map"></div>'], ['<div id="map"></div>']),
+    _templateObject2 = _taggedTemplateLiteral(['\n      <button class=name onclick=', '>\n        ', '\n      </button>\n      <button class=invite onclick=', '>\n        ', '\n      </button>\n      <button class=location onclick=', '>geo</button>\n    '], ['\n      <button class=name onclick=', '>\n        ', '\n      </button>\n      <button class=invite onclick=', '>\n        ', '\n      </button>\n      <button class=location onclick=', '>geo</button>\n    ']),
+    _templateObject3 = _taggedTemplateLiteral(['<div class="popup"><div></div></div>'], ['<div class="popup"><div></div></div>']),
+    _templateObject4 = _taggedTemplateLiteral(['\n      <input\n        onclick=', '\n        placeholder="say something"\n        maxlength=160\n        name=message\n        autocomplete=off\n        autocorrect=off\n        autocapitalize=off\n      />\n      <input type=submit />\n    '], ['\n      <input\n        onclick=', '\n        placeholder="say something"\n        maxlength=160\n        name=message\n        autocomplete=off\n        autocorrect=off\n        autocapitalize=off\n      />\n      <input type=submit />\n    ']);
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -44,6 +45,10 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       IS_GUEST = _require2.IS_GUEST;
 
   document.addEventListener('DOMContentLoaded', function (event) {
+
+    // add the div map to the body
+    hyperHTML(document.body)(_templateObject);
+
     // both leaflet and pusher might have
     // some asynchronous initialization
     // wait for both of them, then kickstart the App
@@ -264,7 +269,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       return this._el;
     },
     update: function update() {
-      hyperHTML(this._el)(_templateObject, this, this._user.name, this, this._user.channel.members.count, this);
+      hyperHTML(this._el)(_templateObject2, this, this._user.name, this, this._user.channel.members.count, this);
     },
     updateUser: function updateUser(user, info) {
       if (info.name) {
@@ -515,14 +520,14 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       this._user = user;
       this._messages = [];
       this._showing = false;
-      this._popup = document.body.appendChild(hyperHTML.wire()(_templateObject2));
+      this._popup = document.body.appendChild(hyperHTML.wire()(_templateObject3));
       this._message = this._popup.firstElementChild;
     },
     onAdd: function onAdd(map) {
       this._map = map;
       this._el = L.DomUtil.create('form', 'messaging');
       this._el.addEventListener('submit', this);
-      hyperHTML(this._el)(_templateObject3, function (e) {
+      hyperHTML(this._el)(_templateObject4, function (e) {
         return e.currentTarget.focus();
       });
       return this._el;

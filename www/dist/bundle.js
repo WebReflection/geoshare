@@ -21,6 +21,10 @@ const {HASH, IS_GUEST} = require(2);
 document.addEventListener(
   'DOMContentLoaded',
   event => {
+
+    // add the div map to the body
+    hyperHTML(document.body)`<div id="map"></div>`;
+
     // both leaflet and pusher might have
     // some asynchronous initialization
     // wait for both of them, then kickstart the App
