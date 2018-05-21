@@ -2,12 +2,18 @@ html, body, #map
 {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+*, *::before, *::after
+{
+  box-sizing: inherit;
 }
 
 #map
 {
   width: 100vw;
-  height: 100vh;
   z-index: 1;
 }
 
