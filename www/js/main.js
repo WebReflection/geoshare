@@ -36,6 +36,7 @@ document.addEventListener(
                     storage.get('name', IS_GUEST ? 'guest' : 'host') : 'guest',
             marker: null,
             isHost: !IS_GUEST && member.id === me.id,
+            tooltip: me.tooltip && me.tooltip.info,
             channel
           };
           // first time a new user is added
@@ -55,13 +56,16 @@ document.addEventListener(
                 id: user.id,
                 name: user.name,
                 coords: user.marker.getLatLng(),
-                isHost: user.isHost
+                isHost: user.isHost,
+                tooltip: user.tooltip
               });
             }
           }
           channel.trigger('client-update-' + member.id, broadcast);
           if (splugin)
             splugin.update();
+          if (me.tooltip)
+            channel.trigger('client-show-tooltip', me.tooltip.info);
         };
 
         // handle new members and also those removed
@@ -85,6 +89,8 @@ document.addEventListener(
               splugin.updateUser(users[client.id], client);
             if (client.firstTime)
               setTimeout(dispatchEvent, 500, new CustomEvent('client-bounds'));
+            if (IS_GUEST && client.tooltip)
+              showTooltip(client.tooltip);
           }
         };
         channel.bind('client-update', updateClient);
@@ -109,6 +115,10 @@ document.addEventListener(
         // event is triggered
         addEventListener('client-bounds', () => {
           const bounds = [];
+          if (me.tooltip) {
+            const {lat, lng} = me.tooltip.getLatLng();
+            bounds.push([lat, lng]);
+          }
           channel.members.each(member => {
             const user = users[member.id];
             if (user.marker) {
@@ -190,6 +200,63 @@ document.addEventListener(
         // show the welcome message right away
         if (!IS_GUEST && !storage.get('location'))
           dispatchEvent(new CustomEvent('geoshare:location'));
+
+        // share a reverse geo-location tooltip
+        // to point at a specific place to your friends
+        const showTooltip = info => {
+          dropTooltip();
+          me.tooltip = new L.marker(info.latlng, {opacity: 0});
+          me.tooltip.bindTooltip(
+            info.display_name,
+            {
+              permanent: true,
+              direction: 'top',
+              offset: [0, 30],
+              className: 'reverse-geo'
+            }
+          );
+          me.tooltip.info = info;
+          me.tooltip.addTo(map);
+        };
+        const dropTooltip = () => {
+          if (me.tooltip) {
+            me.tooltip.removeFrom(map);
+            me.tooltip = null;
+          }
+        };
+
+        if (IS_GUEST) {
+          channel.bind('client-show-tooltip', showTooltip);
+          channel.bind('client-drop-tooltip', dropTooltip);
+        } else {
+          map.on('contextmenu', event => {
+            const script = document.createElement('script');
+            const uid = '_' + String(Date.now() + Math.random()).replace(/\D/g, '_');
+            const url = ['https://nominatim.openstreetmap.org/reverse?format=json'];
+            url.push(
+              'addressdetails=0',
+              `lat=${event.latlng.lat}`,
+              `lon=${event.latlng.lng}`,
+              `zoom=${map.getZoom()}`,
+              `json_callback=${uid}`
+            );
+            window[uid] = result => {
+              delete window[uid];
+              document.documentElement.removeChild(script);
+              const info = {
+                latlng: event.latlng,
+                display_name: result.display_name
+              };
+              showTooltip(info);
+              me.tooltip.on('click', () => {
+                dropTooltip();
+                channel.trigger('client-drop-tooltip', info);
+              });
+              channel.trigger('client-show-tooltip', info);
+            };
+            document.documentElement.appendChild(script).src = url.join('&');
+          });
+        }
       },
       console.error
     );

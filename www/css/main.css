@@ -139,6 +139,12 @@ html, body, #map
   color: #111;
 }
 
+.reverse-geo
+{
+  width: 200px;
+  white-space: normal;
+}
+
 @media (max-width: 800px)
 {
   .popup
