@@ -26,6 +26,7 @@ as long as you are using the app, also see you as host of the group (dark icon).
 
   * [Zeit now-cli](https://zeit.co/now) for the easiest deployment ever!
   * [Leaflet](https://leafletjs.com) library for the map on top of [OpenStreetmap](https://www.openstreetmap.org/) tiles
+  * [Nominatim](https://nominatim.openstreetmap.org) for reverse geocoding on longpress (to share a tooltip from the host)
   * [Pusher Channels API](https://pusher.com/channels?utm_source=dev.to&utm_medium=referral&utm_campaign=Devtocontest) for real-time updates and communications
   * [NoSleep](https://github.com/richtr/NoSleep.js?utm_source=recordnotfound.com#nosleepjs) utility to (hopefully) prevent device from sleeping
   * [hyperHTML](https://github.com/WebReflection/hyperHTML#hyperhtml) for layout render and updates
