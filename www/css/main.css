@@ -1,14 +1,28 @@
+html
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+
 html, body, #map
 {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  height: 100%;
 }
 
 *, *::before, *::after
 {
   box-sizing: inherit;
+}
+
+body, #map
+{
+  height: 100%;
 }
 
 #map
