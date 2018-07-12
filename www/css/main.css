@@ -1,18 +1,18 @@
 html
 {
+  overflow: hidden;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  overflow: hidden;
 }
 
 html, body, #map
 {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 *, *::before, *::after
@@ -27,28 +27,28 @@ body, #map
 
 #map
 {
-  width: 100%;
   z-index: 1;
+  width: 100%;
 }
 
 .settings
 {
   display: flex;
   flex-direction: column;
-  background: rgba(0, 0, 0,0.2);
-  border-radius: 2px;
   padding: 2px;
+  border-radius: 2px;
+  background: rgba(0, 0, 0,0.2);
 }
 
 .settings button
 {
-  flex-grow: 1;
+  margin: 0;
+  border: none;
+  background-color: #fff;
   line-height: 30px;
   text-align: left;
-  background-color: #fff;
   pointer-events: auto;
-  border: none;
-  margin: 0;
+  flex-grow: 1;
 }
 
 .settings button:not(:disabled):hover
@@ -67,32 +67,32 @@ body, #map
 .settings button.location
 {
   border-top: 1px solid #ccc;
-  border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
 }
 
 .settings button.name::after,
 .settings button.invite::after,
 .settings button.location::after
 {
-  font-size: 18px;
   float: right;
   margin-left: 8px;
+  font-size: 18px;
 }
 
 .settings button.name::after
 {
-  content: '👤';
+  content: "👤";
 }
 
 .settings button.invite::after
 {
-  content: '👥';
+  content: "👥";
 }
 
 .settings button.location::after
 {
-  content: '🌐';
+  content: "🌐";
 }
 
 .leaflet-pane img,
@@ -105,46 +105,46 @@ body, #map
 {
   display: flex;
   flex-direction: row;
-  background: rgba(0, 0, 0,0.2);
-  border-radius: 2px;
   padding: 2px;
+  border-radius: 2px;
+  background: rgba(0, 0, 0,0.2);
 }
 
 .messaging input[type="submit"]
 {
+  border-left: 1px solid #ccc;
   background-color: #f4f4f4;
   cursor: pointer;
-  border-left: 1px solid #ccc;
 }
 
 .messaging input
 {
-  line-height: 27px;
-  border: none;
   margin: 0;
+  border: none;
+  line-height: 27px;
 }
 
 .messaging input[name="message"]
 {
-  flex-grow: 1;
   padding: 0 4px;
+  flex-grow: 1;
 }
 
 .popup
 {
-  pointer-events: none;
   position: fixed;
+  z-index: 2;
   top: 128px;
   left: 40%;
   width: 60%;
   margin-left: calc(-1 * (20% + 4px));
-  background: rgba(0, 0, 0,0.2);
-  border-radius: 2px;
   padding: 2px;
+  border-radius: 2px;
   opacity: 0;
-  z-index: 2;
-  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  background: rgba(0, 0, 0,0.2);
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   transition: opacity 0.5s 0.1s ease-in;
+  pointer-events: none;
 }
 
 .popup.show
@@ -155,8 +155,8 @@ body, #map
 .popup > div
 {
   padding: 16px;
-  background-color: #fff;
   color: #111;
+  background-color: #fff;
 }
 
 .reverse-geo
@@ -191,5 +191,13 @@ body, #map
   .messaging
   {
     transform: translateY(-16px);
+  }
+}
+
+@media (max-width: 320px)
+{
+  .messaging input
+  {
+    width: 108px;
   }
 }
